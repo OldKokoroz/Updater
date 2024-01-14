@@ -4,6 +4,7 @@ import banners
 import time
 
 app_name = ""
+repo_txt_link = ""
 
 
 def update_client_version(v):
@@ -16,7 +17,7 @@ def update_client_version(v):
 
 def main():
     try:
-        version = urlopen("..../your_app/version.txt").read()
+        version = (urlopen(repo_txt_link).read()).split("\n")[0]
 
     except Exception:
         print("[!] Unable to Fetch Origin version.txt     [!]")
@@ -26,16 +27,16 @@ def main():
 
     if update_client_version(version) is True:
         subprocess.call(["git", "pull", "origin", "master"])
-        return "[+] Updated to latest version: v{}..".format(version)
+        return f"[+] Updated to latest version: v{version}.. [+]"
 
     else:
         return "[*] You are already up to date [*]"
 
 
 if __name__ == '__main__':
-    print(f"[*] Welcome to {app_name} Auto Updater")
+    print(f"[*] Welcome to {app_name} Auto Updater [*]")
     print("[++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++]")
-    print("[*] Please Note : Git must be installed in order to use \"updater.py\"")
+    print("[*] Note : Git must be installed to use updater.py [*]")
     time.sleep(5)
     print("[++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++]")
     print(f"[*] Checking {app_name} version information..    [*]")
